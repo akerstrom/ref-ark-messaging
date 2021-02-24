@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: refark-station
+  namespace: refark
+spec:
+  type: LoadBalancer
+  selector:
+    app: refark-station
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80

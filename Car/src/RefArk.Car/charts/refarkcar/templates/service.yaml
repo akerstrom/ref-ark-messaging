@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "refarkcar.fullname" . }}
+  labels:
+    app: {{ template "refarkcar.name" . }}
+    chart: {{ template "refarkcar.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app: {{ template "refarkcar.name" . }}
+    release: {{ .Release.Name }}

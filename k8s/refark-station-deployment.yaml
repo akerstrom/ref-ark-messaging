@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: refark-station
+  name: refark-station
+  namespace: refark
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: refark-station
+  template:
+    metadata:
+      labels:
+        app: refark-station
+    spec:
+      containers:
+        - name: refarkstation
+          image: okq8ark.azurecr.io/refarkstation:latest
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 80
+            protocol: TCP

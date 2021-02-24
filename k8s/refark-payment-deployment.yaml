@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: refark-payment
+  name: refark-payment
+  namespace: refark
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: refark-payment
+  template:
+    metadata:
+      labels:
+        app: refark-payment
+    spec:
+      containers:
+        - name: refarkpayment
+          image: okq8ark.azurecr.io/refarkpayment:latest
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 80
+            protocol: TCP

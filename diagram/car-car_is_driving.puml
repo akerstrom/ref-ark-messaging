@@ -1,0 +1,10 @@
+@@startuml Car is driving
+loop car is driving
+    Car -> ConnectedVehiclePlatform: Send waypoint
+    ConnectedVehiclePlatform -> EventHub: Create event
+end
+loop read driving events
+    ConnectedVehiclePlatform -> EventHub: Read events
+    ConnectedVehiclePlatform -> CVPDB: Store data
+end
+@@enduml
