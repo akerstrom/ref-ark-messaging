@@ -23,7 +23,7 @@ namespace RefArk.Car.Services
 
         public Task StartAsync(CancellationToken stoppingToken)
         {
-            _logger.LogInformation("Timed Hosted Service running.");
+            _logger.LogInformation("Simulate Driving Service running.");
 
             //_timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
 
@@ -45,10 +45,10 @@ namespace RefArk.Car.Services
 
             _logger.LogInformation("Driving... Count: {Count}", count);
 
-            var connectionString = "Endpoint=sb://okq8-ark-eventhub.servicebus.windows.net/;SharedAccessKeyName=okq8-ark;SharedAccessKey=DxHhESlasbUVHbIVG9apA5F9hdmeDamr90xk7GOYKZU=";
+            var eventHubConnectionString = "Endpoint=sb://okq8-ark-eventhub.servicebus.windows.net/;SharedAccessKeyName=okq8-ark;SharedAccessKey=DxHhESlasbUVHbIVG9apA5F9hdmeDamr90xk7GOYKZU=";
             var eventHubName = "car-waypoint";
 
-            var producer = new EventHubProducerClient(connectionString, eventHubName);
+            var producer = new EventHubProducerClient(eventHubConnectionString, eventHubName);
             string[] partitionIds = await producer.GetPartitionIdsAsync();
 
             try
@@ -67,7 +67,8 @@ namespace RefArk.Car.Services
 
                     var eventBody = new BinaryData(body);
                     var eventData = new EventData(eventBody);
-
+                    
+                    eventBatch.TryAdd(eventData);
                 }
                 await producer.SendAsync(eventBatch);
             }
@@ -84,7 +85,7 @@ namespace RefArk.Car.Services
 
         public Task StopAsync(CancellationToken stoppingToken)
         {
-            _logger.LogInformation("Timed Hosted Service is stopping.");
+            _logger.LogInformation("Simulate Driving Service is stopping.");
 
             _timer?.Change(Timeout.Infinite, 0);
 

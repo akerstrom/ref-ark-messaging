@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using RefArk.Car.Processor;
 using RefArk.Car.Services;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,10 @@ namespace RefArk.Car
             services.AddSingleton<SimulateDrivingService>();
             services.AddHostedService<SimulateDrivingService>(provider => provider.GetService<SimulateDrivingService>());
 
-            //services.AddHostedService<SimulateDrivingService>();
+            services.AddSingleton<WaypointListenerService>();
+            services.AddHostedService<WaypointListenerService>(provider => provider.GetService<WaypointListenerService>());
+
+            services.AddSingleton<WaypointProcessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
