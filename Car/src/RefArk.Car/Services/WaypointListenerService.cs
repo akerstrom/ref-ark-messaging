@@ -35,20 +35,7 @@ namespace RefArk.Car.Services
         public Task StartListening()
         {
             _logger.LogInformation("Start listening...");
-            var eventHubConnectionString = "Endpoint=sb://okq8-ark-eventhub.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=/xRcZ2tUWKIO3h7DL4mvn2R0cRdkThLIJbHPJVCOSyM=";
-            var eventHubName = "car-waypoint";
-            var blobStorageConnectionString = "DefaultEndpointsProtocol=https;AccountName=okq8arkstorage;AccountKey=GT9tDqzYqeYLDYUCxxQyt3nNDpgBB0YcngdGXWKSLkiWDfFtLYtH7kPW3UfZUuIsJCxFotUHRq4DL9nxaL6Jyg==;EndpointSuffix=core.windows.net";
-            var blobContainerName = "car-waypoint";
-            var consumerGroup = "StoreData";
-
-            BlobContainerClient storageClient = new BlobContainerClient(blobStorageConnectionString, blobContainerName);
-            EventProcessorClient processor = new EventProcessorClient(storageClient, consumerGroup, eventHubConnectionString, eventHubName);
-
-            processor.ProcessEventAsync += ProcessEventHandler;
-            processor.ProcessErrorAsync += ProcessErrorHandler;
-
-            // Start the processing
-            processor.StartProcessing();
+            _processor.StartProcessing();
 
             return Task.CompletedTask;
         }
@@ -56,7 +43,7 @@ namespace RefArk.Car.Services
         public Task StopListening()
         {
             _logger.LogInformation("Stop listening...");
-            processor.StopProcessing();
+            _processor.StopProcessing();
 
             return Task.CompletedTask;
         }
@@ -64,7 +51,6 @@ namespace RefArk.Car.Services
         public Task StopAsync(CancellationToken stoppingToken)
         {
             _logger.LogInformation("Waypoint Listener Service is stopping.");
-            processor.StopProcessing();
 
             return Task.CompletedTask;
         }
