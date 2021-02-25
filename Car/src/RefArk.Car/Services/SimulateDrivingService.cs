@@ -25,8 +25,6 @@ namespace RefArk.Car.Services
         {
             _logger.LogInformation("Simulate Driving Service running.");
 
-            //_timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
-
             return Task.CompletedTask;
         }
 
@@ -60,8 +58,8 @@ namespace RefArk.Car.Services
                     Bogus.Faker faker = new Bogus.Faker();
                     var lat = faker.Address.Latitude().ToString();
                     var lon = faker.Address.Latitude().ToString();
-                    var timestamp = DateTime.Now.ToString("s");
-                    var waypoint = new WaypointModel { CarID = "1", Latitude = lat, Longitude = lon, Timestamp = timestamp };
+                    var timestamp = DateTime.Now;
+                    var waypoint = new WaypointModel { WaypointID=Guid.NewGuid(), CarID = "1", Latitude = lat, Longitude = lon, Timestamp = timestamp };
                     var body = JsonSerializer.Serialize(waypoint);
                     _logger.LogInformation(body);
 

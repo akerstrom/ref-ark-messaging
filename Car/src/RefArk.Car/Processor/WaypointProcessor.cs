@@ -9,6 +9,7 @@ using Azure.Messaging.EventHubs.Producer;
 using Azure.Storage.Blobs;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using RefArk.Car.Databases;
 using RefArk.Customer.Models;
 
 namespace RefArk.Car.Processor
@@ -17,10 +18,12 @@ namespace RefArk.Car.Processor
     {
         private readonly ILogger<WaypointProcessor> _logger;
         private EventProcessorClient processor;
+        private WaypointDB _waypointDB;
 
-        public WaypointProcessor(ILogger<WaypointProcessor> logger)
+        public WaypointProcessor(ILogger<WaypointProcessor> logger, WaypointDB waypointDB)
         {
             _logger = logger;
+            _waypointDB = waypointDB;
         }
         public Task StartProcessing()
         {
@@ -45,14 +48,17 @@ namespace RefArk.Car.Processor
 
         public Task StopProcessing()
         {
+            _waypointDB.Close();
             processor.StopProcessing();
             return Task.CompletedTask;
         }
 
         async Task ProcessEventHandler(ProcessEventArgs eventArgs)
         {
-            // Write the body of the event to the console window
-            _logger.LogInformation("\tReceived event: {0}", Encoding.UTF8.GetString(eventArgs.Data.Body.ToArray()));
+            var waypointJson = Encoding.UTF8.GetString(eventArgs.Data.Body.ToArray());
+            var waypoint = JsonSerializer.Deserialize<WaypointModel>(waypointJson);
+            
+            _waypointDB.Store(waypoint);
 
             // Update checkpoint in the blob storage so that the app receives only new events the next time it's run
             await eventArgs.UpdateCheckpointAsync(eventArgs.CancellationToken);
