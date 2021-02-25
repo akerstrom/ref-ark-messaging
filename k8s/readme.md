@@ -9,4 +9,7 @@ kubectl apply -f refark-car-deployment.yaml
 
 
 ## reload pod
+kubectl rollout restart deployment/refark-car -n refark
+
+### list history
 kubectl rollout history deployment refark-customer -n refark

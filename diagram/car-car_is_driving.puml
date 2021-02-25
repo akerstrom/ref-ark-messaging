@@ -5,6 +5,6 @@ loop car is driving
 end
 loop read driving events
     ConnectedVehiclePlatform -> EventHub: Read events
-    ConnectedVehiclePlatform -> CVPDB: Store data
+    ConnectedVehiclePlatform -> CosmosDB: Store data
 end
 @@enduml
