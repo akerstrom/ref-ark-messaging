@@ -7,4 +7,6 @@ loop read driving events
     ConnectedVehiclePlatform -> EventHub: Read events
     ConnectedVehiclePlatform -> CosmosDB: Store data
 end
+Car -> ConnectedVehiclePlatform: End Trip
+ConnectedVehiclePlatform -> ServiceBus: TripEndeded
 @@enduml

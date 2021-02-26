@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure.Messaging.EventHubs;
 using Azure.Messaging.EventHubs.Producer;
+using Azure.Messaging.ServiceBus;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using RefArk.Customer.Models;
@@ -79,6 +80,27 @@ namespace RefArk.Car.Services
                 await producer.CloseAsync();
             }
 
+        }
+
+        private async void SendTripEndedEvent()
+        {
+            var connectionString = "Endpoint=sb://okq8-ark.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=NXvRQ3vev/pvuTSfU5c0lPg2jTVWT8lN52HB4ZOBHhA=";
+            var topicName = "TripEnded";
+            
+            // create a Service Bus client 
+            await using (ServiceBusClient client = new ServiceBusClient(connectionString))
+            {
+                // create a sender for the queue 
+                ServiceBusSender sender = client.CreateSender(topicName);
+
+                TripEndedEventModel tripEndedEvent = new TripEndedEventModel() { CarID = "1", Timestamp = DateTime.Now };
+                var body = JsonSerializer.Serialize(tripEndedEvent);
+
+                ServiceBusMessage message = new ServiceBusMessage(body);
+                await sender.SendMessageAsync(message);
+
+                Console.WriteLine($"Sent a single message to the queue: {topicName}");
+            }
         }
 
         public Task StopAsync(CancellationToken stoppingToken)
