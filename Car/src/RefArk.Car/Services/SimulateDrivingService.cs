@@ -85,7 +85,7 @@ namespace RefArk.Car.Services
         private async void SendTripEndedEvent()
         {
             var connectionString = "Endpoint=sb://okq8-ark.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=NXvRQ3vev/pvuTSfU5c0lPg2jTVWT8lN52HB4ZOBHhA=";
-            var topicName = "TripEnded";
+            var topicName = "tripended";
             
             // create a Service Bus client 
             await using (ServiceBusClient client = new ServiceBusClient(connectionString))
@@ -97,9 +97,11 @@ namespace RefArk.Car.Services
                 var body = JsonSerializer.Serialize(tripEndedEvent);
 
                 ServiceBusMessage message = new ServiceBusMessage(body);
+                message.ContentType = "application/json"; 
+
                 await sender.SendMessageAsync(message);
 
-                Console.WriteLine($"Sent a single message to the queue: {topicName}");
+                _logger.LogInformation($"Sent a single message to the queue: {topicName}");
             }
         }
 
@@ -108,6 +110,7 @@ namespace RefArk.Car.Services
             _logger.LogInformation("Simulate Driving Service is stopping.");
 
             _timer?.Change(Timeout.Infinite, 0);
+            SendTripEndedEvent();
 
             return Task.CompletedTask;
         }

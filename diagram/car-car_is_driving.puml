@@ -1,12 +1,14 @@
 @@startuml Car is driving
 loop car is driving
-    Car -> ConnectedVehiclePlatform: Send waypoint
-    ConnectedVehiclePlatform -> EventHub: Create event
+    Car -> RefArk.Car: Send waypoint
+    RefArk.Car -> EventHub: Create event
 end
 loop read driving events
-    ConnectedVehiclePlatform -> EventHub: Read events
-    ConnectedVehiclePlatform -> CosmosDB: Store data
+    RefArk.Car -> EventHub: Read events
+    RefArk.Car -> CosmosDB: Store data
 end
-Car -> ConnectedVehiclePlatform: End Trip
-ConnectedVehiclePlatform -> ServiceBus: TripEndeded
+Car -> RefArk.Car: End Trip
+RefArk.Car -> ServiceBus: Trip endeded [Topic:tripended]
+RefArk.Car -> ServiceBus: Subscribe[Topic:tripended]
+RefArk.Car -> CarDB: StoreTrip
 @@enduml

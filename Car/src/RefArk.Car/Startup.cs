@@ -9,6 +9,7 @@ using Microsoft.OpenApi.Models;
 using RefArk.Car.Databases;
 using RefArk.Car.Processor;
 using RefArk.Car.Services;
+using RefArk.Car.Subscribers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,8 @@ namespace RefArk.Car
 
             services.AddSingleton<WaypointProcessor>();
             services.AddSingleton<WaypointDB>();
+            services.AddSingleton<TripEndedEventSubscriber>();
+
 
         }
 
