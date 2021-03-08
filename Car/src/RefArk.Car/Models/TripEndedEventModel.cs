@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RefArk.Customer.Models
+namespace RefArk.Car.Models
 {
     public class TripEndedEventModel
     {

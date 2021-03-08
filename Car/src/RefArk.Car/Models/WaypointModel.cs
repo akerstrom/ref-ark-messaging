@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace RefArk.Customer.Models
+namespace RefArk.Car.Models
 {
     public class WaypointModel
     {

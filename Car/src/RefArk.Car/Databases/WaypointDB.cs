@@ -1,6 +1,6 @@
 ﻿using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Logging;
-using RefArk.Customer.Models;
+using RefArk.Car.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

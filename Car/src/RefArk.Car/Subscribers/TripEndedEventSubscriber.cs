@@ -1,7 +1,7 @@
 ﻿using Azure.Messaging.ServiceBus;
 using Microsoft.Extensions.Logging;
 using RefArk.Car.Databases;
-using RefArk.Customer.Models;
+using RefArk.Car.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

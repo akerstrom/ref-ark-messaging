@@ -7,7 +7,7 @@ using Azure.Messaging.EventHubs.Producer;
 using Azure.Messaging.ServiceBus;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using RefArk.Customer.Models;
+using RefArk.Car.Models;
 
 namespace RefArk.Car.Services
 {

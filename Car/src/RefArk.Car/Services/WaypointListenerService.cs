@@ -10,7 +10,7 @@ using Azure.Storage.Blobs;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using RefArk.Car.Processor;
-using RefArk.Customer.Models;
+using RefArk.Car.Models;
 
 namespace RefArk.Car.Services
 {

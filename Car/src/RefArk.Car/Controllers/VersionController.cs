@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RefArk.Customer.Models;
+using RefArk.Car.Models;
 
-namespace RefArk.Customer.Controllers
+namespace RefArk.Car.Controllers
 {
     [ApiController]
     [Route("/api/[controller]")]

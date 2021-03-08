@@ -1,5 +1,5 @@
 ﻿
-namespace RefArk.Customer.Models
+namespace RefArk.Car.Models
 {
     public class VersionModel
     {
