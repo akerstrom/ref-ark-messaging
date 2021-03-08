@@ -58,7 +58,7 @@ namespace RefArk.Car.Services
                 {
                     Bogus.Faker faker = new Bogus.Faker();
                     var lat = faker.Address.Latitude().ToString();
-                    var lon = faker.Address.Latitude().ToString();
+                    var lon = faker.Address.Longitude().ToString();
                     var timestamp = DateTime.Now;
                     var waypoint = new WaypointModel { WaypointID=Guid.NewGuid(), CarID = "1", Latitude = lat, Longitude = lon, Timestamp = timestamp };
                     var body = JsonSerializer.Serialize(waypoint);
@@ -90,10 +90,21 @@ namespace RefArk.Car.Services
             // create a Service Bus client 
             await using (ServiceBusClient client = new ServiceBusClient(connectionString))
             {
+                Bogus.Faker fakerStart = new Bogus.Faker();
+                var latStart = fakerStart.Address.Latitude().ToString();
+                var lonStart = fakerStart.Address.Longitude().ToString();
+
+                Bogus.Faker fakerEnd = new Bogus.Faker();
+                var latEnd = fakerEnd.Address.Latitude().ToString();
+                var lonEnd = fakerEnd.Address.Longitude().ToString();
+
                 // create a sender for the queue 
                 ServiceBusSender sender = client.CreateSender(topicName);
 
-                TripEndedEventModel tripEndedEvent = new TripEndedEventModel() { CarID = "1", Timestamp = DateTime.Now };
+                TripEndedEventModel tripEndedEvent = new TripEndedEventModel() { CarID = "1", FuelLevel = 8, WiperFluidLevel = 9, Timestamp = DateTime.Now };
+                tripEndedEvent.StartPosition = new Position() { Latitude = latStart, Longitude = lonStart };
+                tripEndedEvent.EndPosition = new Position() { Latitude = latEnd, Longitude = lonEnd };
+
                 var body = JsonSerializer.Serialize(tripEndedEvent);
 
                 ServiceBusMessage message = new ServiceBusMessage(body);

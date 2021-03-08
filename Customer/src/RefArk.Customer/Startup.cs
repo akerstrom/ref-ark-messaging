@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using RefArk.Customer.Databases;
+using RefArk.Customer.Subscribers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +34,9 @@ namespace RefArk.Customer
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "RefArk.Customer", Version = "v1" });
             });
+
+            services.AddSingleton<TripEndedEventSubscriber>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

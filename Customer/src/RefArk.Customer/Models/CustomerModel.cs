@@ -7,8 +7,9 @@ namespace RefArk.Customer.Models
 {
     public class CustomerModel
     {
+        public string CustomerID { get; set; }
         public string Name { get; set; }
-        public int Id{ get; set; }
+        public int NoOfTrips { get; set; }
 
     }
 }

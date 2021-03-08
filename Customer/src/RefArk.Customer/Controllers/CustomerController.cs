@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using RefArk.Customer.Models;
+using RefArk.Customer.Databases;
 
 namespace RefArk.Customer.Controllers
 {
@@ -20,9 +21,17 @@ namespace RefArk.Customer.Controllers
         }
 
         [HttpGet]
-        public CustomerModel Get(int id)
+        public CustomerModel Get(string id)
         {
-            CustomerModel customer = new CustomerModel() { Name = "Alice", Id = id };
+            CustomerModel customer = new CustomerModel() { Name = "Alice", CustomerID = id };
+            return customer;
+        }
+
+        [HttpGet("ByCar/{carID}")]
+        public CustomerModel GetCustomerByCarID(string carID)
+        {
+            CustomerDB customerDB = new CustomerDB();
+            CustomerModel customer = customerDB.GetCustomerByCarID(carID);
             return customer;
         }
     }
