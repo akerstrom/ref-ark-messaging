@@ -26,7 +26,7 @@ namespace RefArk.Customer.Databases
 
                 builder.DataSource = "okq8-ark-db.database.windows.net";
                 builder.UserID = "peter";
-                builder.Password = "Changeme2012";
+                builder.Password = "OKQ8okq8";
                 builder.InitialCatalog = "RefArk.Customer.DB";
 
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
@@ -56,7 +56,7 @@ namespace RefArk.Customer.Databases
 
             builder.DataSource = "okq8-ark-db.database.windows.net";
             builder.UserID = "peter";
-            builder.Password = "";
+            builder.Password = "OKQ8okq8";
             builder.InitialCatalog = "RefArk.Customer.DB";
 
             using (SqlConnection connection = new SqlConnection(builder.ConnectionString))

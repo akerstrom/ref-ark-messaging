@@ -25,7 +25,7 @@ namespace RefArk.Station.Subscribers
         {
             var connectionString = "Endpoint=sb://okq8-ark.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=NXvRQ3vev/pvuTSfU5c0lPg2jTVWT8lN52HB4ZOBHhA=";
             var topicName = "tripended";
-            var subscriptionName = "RefArk.Car.1";
+            var subscriptionName = "RefArk.Station.1";
 
             client = new ServiceBusClient(connectionString);
                 
@@ -52,7 +52,7 @@ namespace RefArk.Station.Subscribers
 
             _logger.LogInformation("Message received - CarID: {0} Timestamp: {1}", trip.CarID, trip.Timestamp.ToString());
             StationDB stationDB = new StationDB();
-            stationDB.Store(trip);
+            stationDB.StoreIncomingCar(trip);
 
             await args.CompleteMessageAsync(args.Message);
         }

@@ -54,7 +54,7 @@ namespace RefArk.Car.Services
             {
                 using EventDataBatch eventBatch = await producer.CreateBatchAsync();
 
-                for (var counter = 0; counter < 10; ++counter)
+                for (var counter = 0; counter < 1; ++counter)
                 {
                     Bogus.Faker faker = new Bogus.Faker();
                     var lat = faker.Address.Latitude().ToString();

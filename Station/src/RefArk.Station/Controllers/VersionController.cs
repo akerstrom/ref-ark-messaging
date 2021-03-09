@@ -11,7 +11,7 @@ namespace RefArk.Customer.Controllers
         [HttpGet]
         public VersionModel Get()
         {
-            return new VersionModel() { Name = "RefArk.Customer", Version = "1" };
+            return new VersionModel() { Name = "RefArk.Station", Version = "1" };
         }
     }
 }

@@ -14,6 +14,7 @@ RefArk.Car -> RefArk.Car.DB: StoreTrip
 RefArk.Customer -> ServiceBus: Subscribe[Topic:tripended]
 RefArk.Customer -> RefArk.Customer.DB: UpdateCustomer
 RefArk.Station -> ServiceBus: Subscribe[Topic:tripended]
+RefArk.Station -> RefArk.Customer: GetCustomerByCarID
 RefArk.Station -> RefArk.Station.DB: StoreIncomingCar
 
 @@enduml
