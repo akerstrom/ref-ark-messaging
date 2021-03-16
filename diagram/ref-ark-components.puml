@@ -1,14 +1,14 @@
 @@startuml Ref-Ark Components
-component RefArk.Authentication
-database RefArk.Authentication.DB
+' component RefArk.Authentication
+' database RefArk.Authentication.DB
 component RefArk.Car
 database RefArk.Car.DB
 component RefArk.Customer
 database RefArk.Customer.DB
-component RefArk.Payment
-database RefArk.Payment.DB
-component RefArk.Product
-database RefArk.Product.DB
+' component RefArk.Payment
+' database RefArk.Payment.DB
+' component RefArk.Product
+' database RefArk.Product.DB
 component RefArk.Station
 database RefArk.Station.DB
 cloud "okq8-ark-eventhub [Event Hubs Namespace]" as EH
@@ -19,16 +19,16 @@ cloud "okq8-ark [Cosmos DB]" as CDB
 queue "tripended [topic]" as TripEnded
 queue "car-waypoint [Event Hub]" as Waypoint
 
-AKS .. RefArk.Authentication
+' AKS .. RefArk.Authentication
 AKS .. RefArk.Car
 AKS .. RefArk.Customer
-AKS .. RefArk.Payment
-AKS .. RefArk.Product
+' AKS .. RefArk.Payment
+' AKS .. RefArk.Product
 AKS .. RefArk.Station
 
 SB .. TripEnded
 
-RefArk.Authentication -- RefArk.Authentication.DB
+' RefArk.Authentication -- RefArk.Authentication.DB
 
 RefArk.Car -- RefArk.Car.DB
 RefArk.Car -- CDB
@@ -39,9 +39,9 @@ RefArk.Car -- Waypoint
 RefArk.Customer -- RefArk.Customer.DB
 RefArk.Customer -- TripEnded
 
-RefArk.Payment -- RefArk.Payment.DB
+' RefArk.Payment -- RefArk.Payment.DB
 
-RefArk.Product -- RefArk.Product.DB
+' RefArk.Product -- RefArk.Product.DB
 
 RefArk.Station -- RefArk.Station.DB
 RefArk.Station -- RefArk.Customer
