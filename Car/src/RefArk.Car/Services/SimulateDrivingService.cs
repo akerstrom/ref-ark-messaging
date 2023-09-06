@@ -44,7 +44,7 @@ namespace RefArk.Car.Services
 
             _logger.LogInformation("Driving... Count: {Count}", count);
 
-            var eventHubConnectionString = "Endpoint=sb://okq8-ark-eventhub.servicebus.windows.net/;SharedAccessKeyName=okq8-ark;SharedAccessKey=DxHhESlasbUVHbIVG9apA5F9hdmeDamr90xk7GOYKZU=";
+            var eventHubConnectionString = "Endpoint=sb://okq8-ark-eventhub.servicebus.windows.net/;SharedAccessKeyName=okq8-ark;SharedAccessKey=[key]";
             var eventHubName = "car-waypoint";
 
             var producer = new EventHubProducerClient(eventHubConnectionString, eventHubName);

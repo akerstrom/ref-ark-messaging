@@ -13,7 +13,7 @@ namespace RefArk.Car.Databases
         private readonly ILogger<WaypointDB> _logger;
 
         // The Azure Cosmos DB endpoint for running this sample.
-        private static readonly string CosmosEndpointUri = "AccountEndpoint=https://okq8-ark.documents.azure.com:443/;AccountKey=G2DB2ia0AaU6JXUCNGCiQE2ZxgDlqnlwIaVpADeMoj89o9TQEA61h99XNkqx23IyGdLKajFA2mnMvKvso5DOiw==;";
+        private static readonly string CosmosEndpointUri = "AccountEndpoint=https://okq8-ark.documents.azure.com:443/;AccountKey=[key];";
 
         // The primary key for the Azure Cosmos account.
         private static readonly string PrimaryKey = "WaypointID";

@@ -28,9 +28,9 @@ namespace RefArk.Car.Processor
         public Task StartProcessing()
         {
             _logger.LogInformation("Start listening...");
-            var eventHubConnectionString = "Endpoint=sb://okq8-ark-eventhub.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=/xRcZ2tUWKIO3h7DL4mvn2R0cRdkThLIJbHPJVCOSyM=";
+            var eventHubConnectionString = "Endpoint=sb://okq8-ark-eventhub.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=[key]";
             var eventHubName = "car-waypoint";
-            var blobStorageConnectionString = "DefaultEndpointsProtocol=https;AccountName=okq8arkstorage;AccountKey=GT9tDqzYqeYLDYUCxxQyt3nNDpgBB0YcngdGXWKSLkiWDfFtLYtH7kPW3UfZUuIsJCxFotUHRq4DL9nxaL6Jyg==;EndpointSuffix=core.windows.net";
+            var blobStorageConnectionString = "DefaultEndpointsProtocol=https;AccountName=okq8arkstorage;AccountKey=[key];EndpointSuffix=core.windows.net";
             var blobContainerName = "car-waypoint";
             var consumerGroup = "StoreData";
 

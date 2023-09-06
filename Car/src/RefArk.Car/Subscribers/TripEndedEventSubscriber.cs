@@ -23,7 +23,7 @@ namespace RefArk.Car.Subscribers
         }
         private void InitSubscrriber()
         {
-            var connectionString = "Endpoint=sb://okq8-ark.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=NXvRQ3vev/pvuTSfU5c0lPg2jTVWT8lN52HB4ZOBHhA=";
+            var connectionString = "Endpoint=sb://okq8-ark.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=[key]";
             var topicName = "tripended";
             var subscriptionName = "RefArk.Car.1";
 
